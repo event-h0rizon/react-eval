@@ -15,13 +15,11 @@ const Home = () => {
 
 
 
-
   const [name, setName] = useState('')
   const [addFileTrigger, setAddFileTrigger] = useState(false)
   const [addFolderTrigger, setAddFolderTrigger] = useState(false)
   const [deleteTrigger, setDeleteTrigger] = useState(false)
   const [renameTrigger, setRenameTrigger] = useState(false)
-
   const [showModalAddFolder, setShowModalAddFolder] = useState(false)
   const [showModalAddFile, setShowModalAddFile] = useState(false)
   const [showModalRename, setShowModalRename] = useState(false)
@@ -39,42 +37,23 @@ const Home = () => {
     setCurrent(e.target.id)
     setCurrentType(e.target.id)
     setShowChildern(value => !value)
-
-    console.log(e.target.id)
-
   }
 
   function toggler() {
-
-
     if (showChildren) {
       setShowChildern(value => !value)
-
-      console.log(array)
       array.forEach((item, index) => {
         const fileFolder = document.getElementById(`${item}`)
         fileFolder.classList.add('hidden')
       })
-      console.log(showChildren)
-
     }
     else {
-
-      console.log(array)
-
-
       array.forEach((item, index) => {
         const fileFolder = document.getElementById(`${item}`)
         fileFolder.classList.remove('hidden')
       })
-      console.log(showChildren)
       setShowChildern(value => !value)
-
     }
-
-
-
-
   }
 
 
@@ -110,18 +89,15 @@ const Home = () => {
     const toDelete = document.getElementById(`${current}`)
 
     if (toDelete) {
-      console.log('Deleted', toDelete)
       toDelete.remove()
       setCurrent()
-
     }
-
+    
   }, [deleteTrigger])
 
 
   useEffect(() => {
     const parent = document.getElementById(`${current}`)
-    const master = document.getElementById('master')
 
 
     if (parent) {
@@ -142,7 +118,6 @@ const Home = () => {
 
   useEffect(() => {
     const parent = document.getElementById(`${current}`)
-    const master = document.getElementById('master')
 
 
     if (parent) {
@@ -150,24 +125,11 @@ const Home = () => {
         const newChild = document.createElement('div');
         newChild.innerHTML = `<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 384 512" class="inline mx-2" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm160-14.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"></path></svg>${name}`;
         newChild.classList.add('file', 'px-4', 'py-1', 'hover:cursor-pointer');
-        // newChild.className=`${showChildren}'':'hidden` 
-        console.log(newChild.classList)
 
         newChild.id = `${name}`
         parent.appendChild(newChild);
 
         setArray(prevArray => [...prevArray, `${name}`]);
-
-
-        // const getAddedFile= document.getElementById(`${name}`)
-        // console.log('ok',getAddedFile)
-        // getAddedFile.addEventListener('click',function() {
-        //   getAddedFile.classList.add('hidden')
-        // })
-
-        // const getAddedFile= document.getElementById(`${name}`).addEventListener('click',function() {
-        //   getAddedFile.classList.add("hidden");
-        // })
         setName('')
 
       }
@@ -184,7 +146,6 @@ const Home = () => {
 
     }
 
-
   }, [currentType])
 
   useEffect(() => {
@@ -194,19 +155,17 @@ const Home = () => {
       console.log(oldName)
       console.log(oldName.classList[0])
       if (oldName.classList[0] === 'file') {
-        oldName.innerHTML = `<div id='downloads' onClick={itemClicked} className='folder px-4 py-1 hover:cursor-pointer'><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 384 512" class="inline mx-2" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm160-14.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"></path></svg>${name}</div>`
+        oldName.innerHTML = `<div id='${name}' onClick={itemClicked} className='folder px-4 py-1 hover:cursor-pointer'><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 384 512" class="inline mx-2" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm160-14.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"></path></svg>${name}</div>`
         setName('')
 
       }
       if (oldName.classList[0] === 'folder') {
-        oldName.innerHTML = `<div id='downloads' onClick={itemClicked} className='folder px-4 py-1 hover:cursor-pointer'><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="inline mx-2" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M464 128H272l-64-64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V176c0-26.51-21.49-48-48-48z"></path></svg>${name}</div>`
+        oldName.innerHTML = `<div id='${name}' onClick={itemClicked} className='folder px-4 py-1 hover:cursor-pointer'><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="inline mx-2" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M464 128H272l-64-64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V176c0-26.51-21.49-48-48-48z"></path></svg>${name}</div>`
         setName('')
       }
 
 
     }
-
-
 
   }, [renameTrigger])
 
